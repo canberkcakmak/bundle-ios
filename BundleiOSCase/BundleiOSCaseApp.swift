@@ -11,7 +11,7 @@ import SwiftUI
 struct BundleiOSCaseApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PackageListView(viewModel: PackageViewModel())
         }
     }
 }
