@@ -10,13 +10,13 @@ import SwiftUI
 struct PackageListView: View {
     @ObservedObject var viewModel: PackageViewModel
 
-    init(viewModel: PackageViewModel) {
-        self.viewModel = viewModel
+    init(){
+        self.viewModel = PackageViewModel()
     }
 
     var body: some View {
         NavigationView {
-            VStack {
+            VStack() {
                 if viewModel.isLoading {
                     ProgressView("")
                         .progressViewStyle(CircularProgressViewStyle(tint: .red))
@@ -25,11 +25,18 @@ struct PackageListView: View {
                     List(viewModel.packages) { package in
                         PackageCellView(package: package)
                             .onTapGesture {
-                                //    $viewModel.navigateToDetail(package: package)
+                                viewModel.navigateToDetail(id: package.id)
+
                             }
                     }
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
+                    
+                    .listStyle(.plain)
                     .navigationBarTitle("Bundle", displayMode: .large)
+                    .sheet(isPresented: $viewModel.isDetailPresented) {
+                        if let _id = viewModel.selectedPackageId{
+                            PackageDetailView(packageId: _id)
+                        }
+                    }
                 }
             }
             .onAppear {
@@ -41,10 +48,10 @@ struct PackageListView: View {
 
 struct PackageListView_Previews: PreviewProvider {
     static var previews: some View {
-        PackageListView(viewModel: PackageViewModel())
+        PackageListView()
     }
 }
 
 #Preview {
-    PackageListView(viewModel: PackageViewModel())
+    PackageListView()
 }

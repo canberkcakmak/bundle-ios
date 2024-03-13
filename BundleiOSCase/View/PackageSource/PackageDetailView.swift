@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct PackageDetailView: View {
-    var package: Package
+   @ObservedObject var viewModel: PackageViewModel
+   let packageId: Int
 
-    var body: some View {
-        VStack {
-            Text(package.name)
-                .font(.title)
-            Text(package.description)
-                .foregroundColor(.secondary)
+   init(packageId: Int) {
+       self.packageId = packageId
+       self.viewModel = PackageViewModel()
+   }
 
-        }
-        .padding()
-        .navigationTitle("Package Detail")
-    }
+   var body: some View {
+       List(viewModel.packageSources) { sources in
+           PackageSourceCellView(sources: sources)
+               .onTapGesture {
+
+               }
+       }
+       .navigationTitle("Paket Kaynakları")
+       .onAppear {
+           viewModel.fetchPackageSources(packageId: packageId)
+       }
+   }
 }
+
