@@ -8,6 +8,9 @@
 import SwiftUI
 import Alamofire
 import Combine
+import RxSwift
+import RxCocoa
+
 
 class PackageViewModel: ObservableObject {
     @Published var packages: [Package] = []
@@ -22,6 +25,20 @@ class PackageViewModel: ObservableObject {
     func navigateToDetail(id: Int){
         self.selectedPackageId = id
         self.isDetailPresented = true
+    }
+    
+    func packageToggleChange(for id: Int, isAdded: Bool) {
+        if let packageIndex = self.packages.firstIndex(where: { $0.id == id }) {
+            self.packages[packageIndex].isAdded = isAdded
+        }
+    }
+    
+    func toggleIsAdded(for index: Int) {
+        self.packageSources[index].isAdded.toggle()
+    }
+    
+    func areAllItemsAdded() -> Bool {
+        return !packageSources.isEmpty && packageSources.allSatisfy { $0.isAdded }
     }
     
     func fetchPackages() {

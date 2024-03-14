@@ -9,7 +9,7 @@ import Foundation
 
 struct Package: Identifiable, Decodable {
     let id: Int
-    let isAdded: Bool
+    var isAdded: Bool
     let name: String
     let description: String
     let index: Int

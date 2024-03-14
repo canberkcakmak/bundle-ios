@@ -6,28 +6,36 @@
 //
 
 import SwiftUI
+import Combine
+
+class ObservablePackageSource: ObservableObject {
+    @Published var packageSource: PackageSource
+
+    init(packageSource: PackageSource) {
+        self.packageSource = packageSource
+    }
+}
 
 struct PackageSourceCellView: View {
-    @State private var isChecked: Bool = false
-    var sources: PackageSource
-    
-    init(sources: PackageSource) {
-        self._isChecked = State(initialValue: sources.isAdded)
-        self.sources = sources
+    @ObservedObject var observablePackageSource: ObservablePackageSource
+
+    init(packageSource: PackageSource) {
+        self.observablePackageSource = ObservablePackageSource(packageSource: packageSource)
     }
-    
+
     var body: some View {
         HStack {
-            Text(sources.name)
+            Text(observablePackageSource.packageSource.name)
                 .font(.subheadline)
                 .opacity(0.8)
                 .foregroundColor(.black)
             Spacer()
-            Image(systemName: isChecked ? "checkmark.square.fill" : "square")
-              .resizable()
-              .foregroundColor(.black)
-              .frame(width: 20, height: 20)
-              .padding(10)
+            Image(systemName: observablePackageSource.packageSource.isAdded ? "checkmark.square.fill" : "square")
+                .resizable()
+                .foregroundColor(.black)
+                .frame(width: 20, height: 20)
+                .padding(10)
         }
+        .contentShape(Rectangle())
     }
 }

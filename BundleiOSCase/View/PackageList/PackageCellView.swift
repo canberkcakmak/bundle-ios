@@ -7,48 +7,53 @@
 
 import SwiftUI
 import Kingfisher
+import Combine
+
+class ObservablePackage: ObservableObject {
+    @Published var package: Package
+
+    init(package: Package) {
+        self.package = package
+    }
+}
 
 struct PackageCellView: View {
-    @State private var isChecked: Bool = false
-    var package: Package
-    
+    @ObservedObject var observablePackage: ObservablePackage
+
     init(package: Package) {
-        self._isChecked = State(initialValue: package.isAdded)
-        self.package = package
+        self.observablePackage = ObservablePackage(package: package)
     }
 
     var body: some View {
- 
         ZStack(alignment: .bottomTrailing) {
-          KFImage(URL(string: package.image))
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .clipped()
-            .scaledToFill()
-            .frame(maxHeight: 150)
-            .cornerRadius(10)
+            KFImage(URL(string: observablePackage.package.image))
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .clipped()
+                .scaledToFill()
+                .frame(maxHeight: 150)
+                .cornerRadius(10)
 
-          VStack(alignment: .center) {
-             Text(package.name)
-               .font(.title)
-               .scaleEffect(0.8)
-               .bold()
-               .foregroundColor(.white)
-              
-              Text(package.description)
-                  .font(.subheadline)
-                  .opacity(0.8)
-                  .foregroundColor(.white)
-          }
-          .frame(maxWidth: .infinity, maxHeight:  .infinity)
- 
-            
-          Image(systemName: isChecked ? "checkmark.square.fill" : "square")
-            .resizable()
-            .foregroundColor(.white)
-            .frame(width: 20, height: 20)
-            .padding(10)
-            .offset(x: -5, y: -5)
+            VStack(alignment: .center) {
+                Text(observablePackage.package.name)
+                    .font(.title)
+                    .scaleEffect(0.8)
+                    .bold()
+                    .foregroundColor(.white)
+
+                Text(observablePackage.package.description)
+                    .font(.subheadline)
+                    .opacity(0.8)
+                    .foregroundColor(.white)
+            }
+            .frame(maxWidth: .infinity, maxHeight:  .infinity)
+
+            Image(systemName: observablePackage.package.isAdded ? "checkmark.square.fill" : "square")
+                .resizable()
+                .foregroundColor(.white)
+                .frame(width: 20, height: 20)
+                .padding(10)
+                .offset(x: -5, y: -5)
         }
         .listRowSeparator(.hidden)
         .padding(.horizontal, 10)

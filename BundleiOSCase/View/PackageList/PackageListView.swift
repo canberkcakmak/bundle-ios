@@ -7,8 +7,15 @@
 
 import SwiftUI
 
+class PackageDetailData: ObservableObject {
+    @Published var packageId: Int?
+    @Published var allItemsAdded: Bool?
+}
+
 struct PackageListView: View {
     @ObservedObject var viewModel: PackageViewModel
+    @StateObject var packageDetailData = PackageDetailData()
+    @State private var isPackageDetailUpdated = false
 
     init(){
         self.viewModel = PackageViewModel()
@@ -22,19 +29,23 @@ struct PackageListView: View {
                         .progressViewStyle(CircularProgressViewStyle(tint: .red))
                         .scaleEffect(1.5)
                 } else {
-                    List(viewModel.packages) { package in
-                        PackageCellView(package: package)
-                            .onTapGesture {
-                                viewModel.navigateToDetail(id: package.id)
-
+                    List {
+                        ForEach(viewModel.packages.indices, id: \.self) { index in
+                            PackageCellView(package: viewModel.packages[index])
+                                .onTapGesture {
+                                    viewModel.navigateToDetail(id: viewModel.packages[index].id)
+                                    isPackageDetailUpdated = false
+                                    packageDetailData.packageId = nil
+                                    packageDetailData.allItemsAdded = nil
                             }
+                        }
                     }
                     
                     .listStyle(.plain)
                     .navigationBarTitle("Bundle", displayMode: .large)
                     .sheet(isPresented: $viewModel.isDetailPresented) {
                         if let _id = viewModel.selectedPackageId{
-                            PackageDetailView(packageId: _id)
+                            PackageDetailView(packageId: _id, detailData: self.packageDetailData)
                         }
                     }
                 }
@@ -42,15 +53,17 @@ struct PackageListView: View {
             .onAppear {
                 viewModel.fetchPackages()
             }
+            .onReceive(packageDetailData.$packageId.combineLatest(packageDetailData.$allItemsAdded)) { packageId, allItemsAdded in
+                if let packageId = packageId, let allItemsAdded = allItemsAdded, !isPackageDetailUpdated {
+                    print("Received packageId: \(packageId), allItemsAdded: \(allItemsAdded)")
+                    viewModel.packageToggleChange(for: packageId, isAdded: allItemsAdded)
+                    isPackageDetailUpdated = true
+                }
+            }
         }
     }
 }
 
-struct PackageListView_Previews: PreviewProvider {
-    static var previews: some View {
-        PackageListView()
-    }
-}
 
 #Preview {
     PackageListView()

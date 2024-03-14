@@ -17,7 +17,7 @@
 		9757F7972B9E503E006EF384 /* BundleiOSCaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757F7962B9E503E006EF384 /* BundleiOSCaseUITests.swift */; };
 		9757F7992B9E503E006EF384 /* BundleiOSCaseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9757F7982B9E503E006EF384 /* BundleiOSCaseUITestsLaunchTests.swift */; };
 		97DB26FC2BA0EFB100146B4A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 97DB26FB2BA0EFB100146B4A /* Alamofire */; };
-		97DB26FE2BA0F09000146B4A /* PackageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB26FD2BA0F09000146B4A /* PackageListViewModel.swift */; };
+		97DB26FE2BA0F09000146B4A /* PackageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB26FD2BA0F09000146B4A /* PackageViewModel.swift */; };
 		97DB27042BA0F3DD00146B4A /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB27032BA0F3DD00146B4A /* Package.swift */; };
 		97DB27072BA0F5E500146B4A /* PackageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB27062BA0F5E500146B4A /* PackageDetailView.swift */; };
 		97DB27092BA0F62F00146B4A /* PackageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB27082BA0F62F00146B4A /* PackageCellView.swift */; };
@@ -25,6 +25,7 @@
 		97DB270E2BA2344300146B4A /* PackageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB270D2BA2344300146B4A /* PackageSource.swift */; };
 		97DB27102BA2399C00146B4A /* PackageSourceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB270F2BA2399C00146B4A /* PackageSourceCellView.swift */; };
 		97DB27122BA23F9A00146B4A /* CustomDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB27112BA23F9A00146B4A /* CustomDecoder.swift */; };
+		97DB27152BA2E87500146B4A /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 97DB27142BA2E87500146B4A /* RxCocoa */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +58,7 @@
 		9757F7922B9E503E006EF384 /* BundleiOSCaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BundleiOSCaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9757F7962B9E503E006EF384 /* BundleiOSCaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleiOSCaseUITests.swift; sourceTree = "<group>"; };
 		9757F7982B9E503E006EF384 /* BundleiOSCaseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleiOSCaseUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		97DB26FD2BA0F09000146B4A /* PackageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageListViewModel.swift; sourceTree = "<group>"; };
+		97DB26FD2BA0F09000146B4A /* PackageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageViewModel.swift; sourceTree = "<group>"; };
 		97DB27032BA0F3DD00146B4A /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		97DB27062BA0F5E500146B4A /* PackageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageDetailView.swift; sourceTree = "<group>"; };
 		97DB27082BA0F62F00146B4A /* PackageCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageCellView.swift; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97DB27152BA2E87500146B4A /* RxCocoa in Frameworks */,
 				97DB270C2BA0FA4200146B4A /* Kingfisher in Frameworks */,
 				97DB26FC2BA0EFB100146B4A /* Alamofire in Frameworks */,
 			);
@@ -209,7 +211,7 @@
 		97DB27052BA0F4EE00146B4A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				97DB26FD2BA0F09000146B4A /* PackageListViewModel.swift */,
+				97DB26FD2BA0F09000146B4A /* PackageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -233,6 +235,7 @@
 			packageProductDependencies = (
 				97DB26FB2BA0EFB100146B4A /* Alamofire */,
 				97DB270B2BA0FA4200146B4A /* Kingfisher */,
+				97DB27142BA2E87500146B4A /* RxCocoa */,
 			);
 			productName = BundleiOSCase;
 			productReference = 9757F7782B9E503B006EF384 /* BundleiOSCase.app */;
@@ -309,6 +312,7 @@
 			packageReferences = (
 				97043B6E2BA0EC8900E80BB8 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				97DB270A2BA0FA4200146B4A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				97DB27132BA2E87500146B4A /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 9757F7792B9E503B006EF384 /* Products */;
 			projectDirPath = "";
@@ -361,7 +365,7 @@
 				9757F77C2B9E503B006EF384 /* BundleiOSCaseApp.swift in Sources */,
 				97043B702BA0ECAC00E80BB8 /* APIService.swift in Sources */,
 				97043B722BA0ED3C00E80BB8 /* Constants.swift in Sources */,
-				97DB26FE2BA0F09000146B4A /* PackageListViewModel.swift in Sources */,
+				97DB26FE2BA0F09000146B4A /* PackageViewModel.swift in Sources */,
 				97DB27092BA0F62F00146B4A /* PackageCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -708,6 +712,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		97DB27132BA2E87500146B4A /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -720,6 +732,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 97DB270A2BA0FA4200146B4A /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		97DB27142BA2E87500146B4A /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97DB27132BA2E87500146B4A /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
