@@ -7,9 +7,6 @@
 
 import SwiftUI
 import Alamofire
-import Combine
-import RxSwift
-import RxCocoa
 
 
 class PackageViewModel: ObservableObject {
